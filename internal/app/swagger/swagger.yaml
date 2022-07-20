@@ -1,0 +1,13 @@
+basePath: /
+info:
+  contact:
+    email: i@hackerchai.com
+    name: Eason Chai
+  description: Web for craling threatbook community to obtain threat ip from feeds.
+  title: threatbook-ip-web
+  version: 0.1.0
+paths: {}
+schemes:
+- http
+- https
+swagger: "2.0"

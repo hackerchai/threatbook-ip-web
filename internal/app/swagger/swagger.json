@@ -1,0 +1,18 @@
+{
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "swagger": "2.0",
+    "info": {
+        "description": "Web for craling threatbook community to obtain threat ip from feeds.",
+        "title": "threatbook-ip-web",
+        "contact": {
+            "name": "Eason Chai",
+            "email": "i@hackerchai.com"
+        },
+        "version": "0.1.0"
+    },
+    "basePath": "/",
+    "paths": {}
+}
