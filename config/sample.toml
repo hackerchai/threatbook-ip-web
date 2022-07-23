@@ -1,0 +1,45 @@
+[common]
+host = "0.0.0.0" # The hostname to bind to (default: 127.0.0.1)
+port = 8080 # app server port (default: 8080)
+deploy_mode = "development" # set deply_mode to development, production (default: development)
+swagger = "disable" # enable/disable swagger-ui (default: disable)
+
+[dev_database]
+database = "dev"
+host = "127.0.0.1"
+password = "123456"
+port = 5432
+username = "root"
+ssl_mode = "disable"
+
+[prod_database]
+database = "prod"
+host = "127.0.0.1"
+password = "123456"
+port = 5432
+username = "root"
+ssl_mode = "disable"
+
+[log]
+type = "console" # console or file (default: console)
+local_time = true # use local time or not (default: true)
+compress = true  # compress log or not (default: true)
+max_age = 30 # max age of log file (days) (default: 30)
+max_size = 100 # max size of log file (MB) (default: 100MB)
+filename = "log/app.log" # log file name (default: log/app.log)
+max_backups = 10 # max number of log files (default: 10)
+level = "info"  # log level: debug, info, warn, error, dpanic, panic, fatal (default: info)
+
+[cors]
+enable = true # enable cors or not
+allow_origins = "*" # allow origins, "*" for all
+allow_headers = "Origin, Content-Type, Accept, Authorization" # allow headers
+allow_methods = "GET, HEAD, PUT, PATCH, POST, DELETE"  # allow methods
+
+[limiter]
+enable = true # enable limiter or not
+limit_max = 20 # max number of requests
+limit_duration = 1 # duration of requests
+
+[csrf]
+enable = true # enable csrf or not

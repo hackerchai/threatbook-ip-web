@@ -25,7 +25,164 @@ var doc = `{
     },
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
-    "paths": {}
+    "paths": {
+        "/api/threats": {
+            "get": {
+                "description": "获取所有的威胁IP信息, 并分页的形式呈现",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Threat"
+                ],
+                "summary": "获取所有的威胁IP信息",
+                "operationId": "get-threats",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "当前查询页码(默认 1)",
+                        "name": "current",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "当前查询每页显示条数(默认 10)",
+                        "name": "page_sizet",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/schema.ThreatsResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "{code:1002,status_code:401,message:no permission}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "{code:1001,status_code:504,message:internal server error}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "ent.Threat": {
+            "type": "object",
+            "properties": {
+                "ctime": {
+                    "description": "Ctime holds the value of the \"ctime\" field.",
+                    "type": "integer"
+                },
+                "domain_count": {
+                    "description": "DomainCount holds the value of the \"domain_count\" field.",
+                    "type": "integer"
+                },
+                "id": {
+                    "description": "ID of the ent.",
+                    "type": "integer"
+                },
+                "ip": {
+                    "description": "IP holds the value of the \"ip\" field.",
+                    "type": "string"
+                },
+                "itel_count": {
+                    "description": "ItelCount holds the value of the \"itel_count\" field.",
+                    "type": "integer"
+                },
+                "judge": {
+                    "description": "Judge holds the value of the \"judge\" field.",
+                    "type": "integer"
+                },
+                "poc": {
+                    "description": "Poc holds the value of the \"poc\" field.",
+                    "type": "boolean"
+                },
+                "source": {
+                    "description": "Source holds the value of the \"source\" field.",
+                    "type": "integer"
+                },
+                "tag_count": {
+                    "description": "TagCount holds the value of the \"tag_count\" field.",
+                    "type": "integer"
+                },
+                "threat_id_info": {
+                    "description": "ThreatIDInfo holds the value of the \"threat_id_info\" field.",
+                    "type": "string"
+                }
+            }
+        },
+        "schema.ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "status_code": {
+                    "type": "integer"
+                }
+            }
+        },
+        "schema.PaginationResponse": {
+            "type": "object",
+            "properties": {
+                "current": {
+                    "type": "integer"
+                },
+                "page_size": {
+                    "type": "integer"
+                },
+                "total": {
+                    "type": "integer"
+                }
+            }
+        },
+        "schema.ThreatsPage": {
+            "type": "object",
+            "properties": {
+                "list": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ent.Threat"
+                    }
+                },
+                "pagnition": {
+                    "$ref": "#/definitions/schema.PaginationResponse"
+                }
+            }
+        },
+        "schema.ThreatsResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {
+                    "$ref": "#/definitions/schema.ThreatsPage"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "status_code": {
+                    "type": "integer"
+                }
+            }
+        }
+    }
 }`
 
 type swaggerInfo struct {

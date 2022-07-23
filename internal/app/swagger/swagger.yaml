@@ -1,4 +1,76 @@
 basePath: /
+definitions:
+  ent.Threat:
+    properties:
+      ctime:
+        description: Ctime holds the value of the "ctime" field.
+        type: integer
+      domain_count:
+        description: DomainCount holds the value of the "domain_count" field.
+        type: integer
+      id:
+        description: ID of the ent.
+        type: integer
+      ip:
+        description: IP holds the value of the "ip" field.
+        type: string
+      itel_count:
+        description: ItelCount holds the value of the "itel_count" field.
+        type: integer
+      judge:
+        description: Judge holds the value of the "judge" field.
+        type: integer
+      poc:
+        description: Poc holds the value of the "poc" field.
+        type: boolean
+      source:
+        description: Source holds the value of the "source" field.
+        type: integer
+      tag_count:
+        description: TagCount holds the value of the "tag_count" field.
+        type: integer
+      threat_id_info:
+        description: ThreatIDInfo holds the value of the "threat_id_info" field.
+        type: string
+    type: object
+  schema.ErrorResponse:
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+      status_code:
+        type: integer
+    type: object
+  schema.PaginationResponse:
+    properties:
+      current:
+        type: integer
+      page_size:
+        type: integer
+      total:
+        type: integer
+    type: object
+  schema.ThreatsPage:
+    properties:
+      list:
+        items:
+          $ref: '#/definitions/ent.Threat'
+        type: array
+      pagnition:
+        $ref: '#/definitions/schema.PaginationResponse'
+    type: object
+  schema.ThreatsResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/schema.ThreatsPage'
+      message:
+        type: string
+      status_code:
+        type: integer
+    type: object
 info:
   contact:
     email: i@hackerchai.com
@@ -6,7 +78,40 @@ info:
   description: Web for craling threatbook community to obtain threat ip from feeds.
   title: threatbook-ip-web
   version: 0.1.0
-paths: {}
+paths:
+  /api/threats:
+    get:
+      consumes:
+      - application/json
+      description: 获取所有的威胁IP信息, 并分页的形式呈现
+      operationId: get-threats
+      parameters:
+      - description: 当前查询页码(默认 1)
+        in: query
+        name: current
+        type: integer
+      - description: 当前查询每页显示条数(默认 10)
+        in: query
+        name: page_sizet
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schema.ThreatsResponse'
+        "400":
+          description: '{code:1002,status_code:401,message:no permission}'
+          schema:
+            $ref: '#/definitions/schema.ErrorResponse'
+        "500":
+          description: '{code:1001,status_code:504,message:internal server error}'
+          schema:
+            $ref: '#/definitions/schema.ErrorResponse'
+      summary: 获取所有的威胁IP信息
+      tags:
+      - Threat
 schemes:
 - http
 - https
