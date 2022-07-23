@@ -3,14 +3,25 @@ package app
 import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
-	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/gofiber/swagger"
 	"github.com/hackerchai/threatbook-ip-web/internal/app/global"
+	"github.com/hackerchai/threatbook-ip-web/internal/app/middleware"
 )
 
 func New() *fiber.App {
 	f := fiber.New()
-	f.Use(logger.New())
+	f.Use(middleware.AccessLogger(&middleware.AccessLoggerConfig{
+		Logger:      global.Logger,
+		Type:        global.CONFIG.Log.Type,
+		Environment: global.CONFIG.Common.DeployMode,
+		Filename:    global.CONFIG.Log.Filename,
+		MaxSize:     global.CONFIG.Log.MaxSize,
+		MaxAge:      global.CONFIG.Log.MaxAge,
+		MaxBackups:  global.CONFIG.Log.MaxBackups,
+		LocalTime:   global.CONFIG.Log.LocalTime,
+		Compress:    global.CONFIG.Log.Compress,
+		Level:       global.CONFIG.Log.GetLogLevel(),
+	}))
 	f.Use(cors.New(cors.Config{
 		AllowOrigins: "*",
 		AllowHeaders: "Origin, Content-Type, Accept, Authorization",

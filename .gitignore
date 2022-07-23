@@ -16,6 +16,7 @@
 /release
 /tmp
 /vendor
+/log
 
 # Dependency directories (remove the comment below to include it)ven
 vendor/

@@ -5,6 +5,7 @@ import (
 	"github.com/hackerchai/threatbook-ip-web/internal/app"
 	"github.com/hackerchai/threatbook-ip-web/internal/app/global"
 	_ "github.com/hackerchai/threatbook-ip-web/internal/app/swagger"
+	"github.com/hackerchai/threatbook-ip-web/pkg/logger"
 )
 
 // @title threatbook-ip-web
@@ -15,6 +16,8 @@ import (
 // @contact.name Eason Chai
 // @contact.email i@hackerchai.com
 func main() {
+	logger.Init()
+	logger.Info("threatbook-ip-web start")
 	app.InitConfig()
 	app.InitDatabase()
 	injector := app.InitializeEvent()
@@ -22,6 +25,6 @@ func main() {
 	address := fmt.Sprintf("%s:%d", global.CONFIG.Common.Host, global.CONFIG.Common.Port)
 	err := injector.Engine.Listen(address)
 	if err != nil {
-		panic(err)
+		logger.Panic("Start Fiber Server error: " + err.Error())
 	}
 }

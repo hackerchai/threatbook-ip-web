@@ -19,3 +19,13 @@ password = "123456"
 port = 5432
 username = "root"
 ssl_mode = "disable"
+
+[log]
+type = "console"
+local_time = true
+compress = true
+max_age = 30
+max_size = 100
+filename = "log/app.log"
+max_backups = 10
+level = "info"

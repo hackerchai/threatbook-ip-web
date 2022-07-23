@@ -7,7 +7,7 @@ import (
 	"github.com/hackerchai/threatbook-ip-web/internal/app/service"
 	"github.com/hackerchai/threatbook-ip-web/internal/app/web"
 	"github.com/hackerchai/threatbook-ip-web/pkg/errors"
-	"log"
+	"github.com/hackerchai/threatbook-ip-web/pkg/logger"
 )
 
 var ThreatAPIStruct = wire.Struct(new(ThreatAPI), "*")
@@ -32,12 +32,12 @@ func (h *ThreatAPI) GetThreats(c *fiber.Ctx) error {
 	ctx := c.Context()
 	var pagnitionParam schema.PaginationParam
 	if err := c.QueryParser(&pagnitionParam); err != nil {
-		log.Println("Parse query failed: ", err)
+		logger.Error("query failed: " + err.Error())
 		return web.ResError(c, errors.ErrInvalidParameter)
 	}
 	threats, pagnitionParamResp, err := h.ThreatSrv.QueryThreatsWithPagnition(ctx, pagnitionParam)
 	if err != nil {
-		log.Println("Database query failed: ", err)
+		logger.Error("Database query failed: " + err.Error())
 		err := web.ResError(c, err)
 		if err != nil {
 			return err

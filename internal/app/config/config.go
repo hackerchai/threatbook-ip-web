@@ -1,11 +1,15 @@
 package config
 
-import "fmt"
+import (
+	"fmt"
+	"go.uber.org/zap/zapcore"
+)
 
 type Config struct {
 	Common       Common   `mapstructure:"common"`
 	DevDatabase  Database `mapstructure:"dev_database"`
 	ProdDatabase Database `mapstructure:"prod_database"`
+	Log          Log      `mapstructure:"log"`
 }
 
 type Common struct {
@@ -24,6 +28,38 @@ type Database struct {
 	SSLMode  string `mapstructure:"ssl_mode"`
 }
 
+type Log struct {
+	Type       string `mapstructure:"type"`
+	Filename   string `mapstructure:"filename"`
+	MaxSize    int    `mapstructure:"max_size"`
+	MaxAge     int    `mapstructure:"max_age"`
+	MaxBackups int    `mapstructure:"max_backups"`
+	LocalTime  bool   `mapstructure:"local_time"`
+	Compress   bool   `mapstructure:"compress"`
+	Level      string `mapstructure:"level"`
+}
+
 func (d *Database) Dsn() string {
 	return fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s sslmode=%s", d.Host, d.Port, d.Username, d.Database, d.Password, d.SSLMode)
+}
+
+func (l *Log) GetLogLevel() zapcore.Level {
+	switch l.Level {
+	case "debug":
+		return zapcore.DebugLevel
+	case "info":
+		return zapcore.InfoLevel
+	case "warn":
+		return zapcore.WarnLevel
+	case "error":
+		return zapcore.ErrorLevel
+	case "dpanic":
+		return zapcore.DPanicLevel
+	case "panic":
+		return zapcore.PanicLevel
+	case "fatal":
+		return zapcore.FatalLevel
+	default:
+		return zapcore.InfoLevel
+	}
 }

@@ -3,8 +3,8 @@ package app
 import (
 	"github.com/hackerchai/threatbook-ip-web/ent"
 	"github.com/hackerchai/threatbook-ip-web/internal/app/global"
+	"github.com/hackerchai/threatbook-ip-web/pkg/logger"
 	_ "github.com/lib/pq"
-	"log"
 )
 
 func InitDatabase() *ent.Client {
@@ -17,12 +17,12 @@ func InitDatabase() *ent.Client {
 	case "production":
 		dbCfg = global.CONFIG.ProdDatabase.Dsn()
 	default:
-		log.Fatal("unsupported deploy mode: " + deployMode)
+		logger.Warn("unsupported deploy mode: " + deployMode)
 		return nil
 	}
 	client, err := ent.Open("postgres", dbCfg)
 	if err != nil {
-		log.Fatal("database connection error: " + err.Error())
+		logger.Fatal("database connection error: " + err.Error())
 		return nil
 	}
 	return client
