@@ -17,7 +17,7 @@ func New() *fiber.App {
 	f.Use(middleware.AccessLogger(&middleware.AccessLoggerConfig{
 		Logger:      global.Logger,
 		Type:        global.CONFIG.Log.Type,
-		Environment: global.CONFIG.Common.DeployMode,
+		Environment: global.CONFIG.Log.Environment,
 		Filename:    global.CONFIG.Log.Filename,
 		MaxSize:     global.CONFIG.Log.MaxSize,
 		MaxAge:      global.CONFIG.Log.MaxAge,

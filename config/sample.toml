@@ -22,6 +22,7 @@ ssl_mode = "disable"
 
 [log]
 type = "console" # console or file (default: console)
+environment = "development" # set log mode to development, production (default: development)
 local_time = true # use local time or not (default: true)
 compress = true  # compress log or not (default: true)
 max_age = 30 # max age of log file (days) (default: 30)

@@ -32,7 +32,7 @@ func Init() {
 	// Use Access Logger in console based on environment by default
 	default:
 		var err error
-		if strings.ToLower(global.CONFIG.Common.DeployMode) == "production" {
+		if strings.ToLower(global.CONFIG.Log.Environment) == "production" {
 			global.Logger, err = zap.NewProduction()
 		} else {
 			global.Logger, err = zap.NewDevelopment()

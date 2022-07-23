@@ -32,14 +32,15 @@ type Database struct {
 }
 
 type Log struct {
-	Type       string `mapstructure:"type"`
-	Filename   string `mapstructure:"filename"`
-	MaxSize    int    `mapstructure:"max_size"`
-	MaxAge     int    `mapstructure:"max_age"`
-	MaxBackups int    `mapstructure:"max_backups"`
-	LocalTime  bool   `mapstructure:"local_time"`
-	Compress   bool   `mapstructure:"compress"`
-	Level      string `mapstructure:"level"`
+	Type        string `mapstructure:"type"`
+	Environment string `mapstructure:"environment"`
+	Filename    string `mapstructure:"filename"`
+	MaxSize     int    `mapstructure:"max_size"`
+	MaxAge      int    `mapstructure:"max_age"`
+	MaxBackups  int    `mapstructure:"max_backups"`
+	LocalTime   bool   `mapstructure:"local_time"`
+	Compress    bool   `mapstructure:"compress"`
+	Level       string `mapstructure:"level"`
 }
 
 type CORS struct {
