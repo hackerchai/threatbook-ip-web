@@ -29,3 +29,17 @@ max_size = 100
 filename = "log/app.log"
 max_backups = 10
 level = "info"
+
+[cors]
+enable = true
+allow_origins = "*"
+allow_headers = "Origin, Content-Type, Accept, Authorization"
+allow_methods = "GET, HEAD, PUT, PATCH, POST, DELETE"
+
+[limiter]
+enable = true
+limit_max = 20
+limit_duration = 1
+
+[csrf]
+enable = true

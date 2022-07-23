@@ -10,6 +10,9 @@ type Config struct {
 	DevDatabase  Database `mapstructure:"dev_database"`
 	ProdDatabase Database `mapstructure:"prod_database"`
 	Log          Log      `mapstructure:"log"`
+	CORS         CORS     `mapstructure:"cors"`
+	Limiter      Limiter  `mapstructure:"limiter"`
+	CSRF         CSRF     `mapstructure:"csrf"`
 }
 
 type Common struct {
@@ -37,6 +40,23 @@ type Log struct {
 	LocalTime  bool   `mapstructure:"local_time"`
 	Compress   bool   `mapstructure:"compress"`
 	Level      string `mapstructure:"level"`
+}
+
+type CORS struct {
+	Enable       bool   `mapstructure:"enable"`
+	AllowOrigins string `mapstructure:"allow_origins"`
+	AllowHeaders string `mapstructure:"allow_headers"`
+	AllowMethods string `mapstructure:"allow_methods"`
+}
+
+type Limiter struct {
+	Enable   bool `mapstructure:"enable"`
+	Max      int  `mapstructure:"limit_max"`
+	Duration int  `mapstructure:"limit_duration"`
+}
+
+type CSRF struct {
+	Enable bool `mapstructure:"enable"`
 }
 
 func (d *Database) Dsn() string {

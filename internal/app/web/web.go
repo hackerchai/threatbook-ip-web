@@ -4,8 +4,8 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/hackerchai/threatbook-ip-web/internal/app/schema"
 	"github.com/hackerchai/threatbook-ip-web/pkg/errors"
+	"github.com/hackerchai/threatbook-ip-web/pkg/logger"
 	"github.com/hackerchai/threatbook-ip-web/pkg/response"
-	"log"
 	"net/http"
 )
 
@@ -69,9 +69,9 @@ func ResError(c *fiber.Ctx, err error, status ...int) error {
 		}
 
 		if status := res.StatusCode; status >= 400 && status < 500 {
-			log.Println(err.Error())
+			logger.Error(err.Error())
 		} else if status >= 500 {
-			log.Println(err.Error())
+			logger.Error(err.Error())
 		}
 	}
 
