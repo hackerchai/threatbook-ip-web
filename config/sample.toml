@@ -1,0 +1,20 @@
+[common]
+host = "0.0.0.0"
+port = 8080
+deploy_mode = "development"
+
+[dev_database]
+database = "dev"
+host = "127.0.0.1"
+password = "123456"
+port = 5432
+username = "root"
+ssl_mode = "disable"
+
+[prod_database]
+database = "prod"
+host = "127.0.0.1"
+password = "123456"
+port = 5432
+username = "root"
+ssl_mode = "disable"
