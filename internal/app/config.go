@@ -13,6 +13,7 @@ func InitConfig() {
 	viper.SetDefault("common.deploy_mode", "development")
 	viper.SetDefault("common.host", "127.0.0.1")
 	viper.SetDefault("common.port", "8080")
+	viper.SetDefault("common.swagger", "disable")
 	err := viper.ReadInConfig()
 	if err != nil {
 		log.Fatal("Read config failed: ", err)
