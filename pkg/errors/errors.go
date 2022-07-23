@@ -15,11 +15,11 @@ var (
 )
 
 var (
-	ErrNoPerm           = response.NewResponse(0, 401, "no permission")
-	ErrNotFound         = response.NewResponse(0, 404, "not found")
-	ErrMethodNotAllow   = response.NewResponse(0, 405, "method not allowed")
-	ErrTooManyRequests  = response.NewResponse(0, 429, "too many requests")
-	ErrInternalServer   = response.NewResponse(0, 504, "internal server error")
-	ErrInvalidParameter = response.NewResponse(0, 500, "invalid parameter")
+	ErrNoPerm           = response.NewResponse(1001, 401, "no permission")
+	ErrNotFound         = response.NewResponse(1002, 404, "not found")
+	ErrMethodNotAllow   = response.NewResponse(1003, 405, "method not allowed")
+	ErrTooManyRequests  = response.NewResponse(2000, 429, "too many requests")
+	ErrInternalServer   = response.NewResponse(3000, 504, "internal server error")
+	ErrInvalidParameter = response.NewResponse(1000, 500, "invalid parameter")
 	ErrBadRequest       = response.New400Response("bad request")
 )
