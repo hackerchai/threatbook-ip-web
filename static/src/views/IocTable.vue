@@ -1,18 +1,28 @@
 <template>
   <div>
-    <el-table :data="tableData" style="width: 96%" height="100%" id="table">
-      <el-table-column fixed prop="threatInfoID" label="威胁ID" width="120">
+    <el-table
+      :data="tableData"
+      style="width: 96%"
+      min-height="256px"
+      id="table"
+      :cell-class-name="tableCellClassName"
+      @row-click="onRowClick"
+    >
+      <el-table-column fixed prop="threat_id_info" label="威胁ID" width="120">
+        <template slot-scope="scope">
+          <span style="cursor: pointer">
+            {{ scope.row.threat_id_info }}
+          </span>
+        </template>
       </el-table-column>
       <el-table-column prop="ctime" label="时间" :formatter="formateTime">
       </el-table-column>
-      <el-table-column prop="ioc" label="IP地址"> </el-table-column>
-      <el-table-column prop="domainCount" label="解析域名" width="100">
+      <el-table-column prop="ip" label="IP地址"> </el-table-column>
+      <el-table-column prop="domain_count" label="解析域名" width="100" :formatter="dataWasher">
       </el-table-column>
-      <el-table-column prop="tagCount" label="标签数量" width="100">
+      <el-table-column prop="tag_count" label="标签数量" width="100" :formatter="dataWasher">
       </el-table-column>
-      <el-table-column prop="itelCount" label="线索数量" width="100">
-      </el-table-column>
-      <el-table-column prop="tagCount" label="标签数量" width="100">
+      <el-table-column prop="itel_count" label="线索数量" width="100" :formatter="dataWasher">
       </el-table-column>
       <el-table-column
         prop="judge"
@@ -21,7 +31,7 @@
         :formatter="formateJudgeType"
       >
       </el-table-column>
-      <el-table-column prop="source" label="数据来源" width="200">
+      <el-table-column prop="source" label="数据来源" width="200" :formatter="formateSource">
       </el-table-column>
     </el-table>
 
@@ -52,141 +62,113 @@ export default {
     return {
       data: [
         {
-          threatInfoID: 14399,
-          ioc: "211.95.50.4",
-          domainCount: "0",
-          tagCount: "5",
-          itelCount: "10",
+          id: 93,
+          ip: "14.29.118.14",
+          threat_id_info: "14556",
+          tag_count: 3,
+          itel_count: 6,
           judge: 2,
-          poc: false,
-          ctime: "1657694018004",
-          source: 0,
+          source: 1,
+          ctime: 1657790439673,
         },
         {
-          threatInfoID: 14399,
-          ioc: "211.95.50.4",
-          domainCount: "0",
-          tagCount: "5",
-          itelCount: "10",
+          id: 109,
+          ip: "157.245.78.71",
+          threat_id_info: "14556",
+          tag_count: 4,
+          itel_count: 7,
           judge: 2,
-          poc: false,
-          ctime: "1657694018004",
-          source: 0,
+          source: 1,
+          ctime: 1657790439673,
         },
         {
-          threatInfoID: 14399,
-          ioc: "211.95.50.4",
-          domainCount: "0",
-          tagCount: "5",
-          itelCount: "10",
-          judge: 2,
-          poc: false,
-          ctime: "1657694018004",
-          source: 0,
+          id: 14,
+          ip: "101.86.144.28",
+          threat_id_info: "14661",
+          domain_count: 1,
+          tag_count: 1,
+          itel_count: 5,
+          judge: 1,
+          source: 1,
+          ctime: 1657952606068,
         },
         {
-          threatInfoID: 14399,
-          ioc: "211.95.50.4",
-          domainCount: "0",
-          tagCount: "5",
-          itelCount: "10",
+          id: 145,
+          ip: "129.146.65.82",
+          threat_id_info: "14420",
+          tag_count: 7,
+          itel_count: 9,
           judge: 2,
-          poc: false,
-          ctime: "1657694018004",
-          source: 0,
+          source: 1,
+          ctime: 1657639280716,
         },
         {
-          threatInfoID: 14399,
-          ioc: "211.95.50.4",
-          domainCount: "0",
-          tagCount: "5",
-          itelCount: "10",
+          id: 87,
+          ip: "120.86.236.18",
+          threat_id_info: "14576",
+          tag_count: 2,
+          itel_count: 3,
           judge: 2,
-          poc: false,
-          ctime: "1657694018004",
-          source: 0,
+          source: 1,
+          ctime: 1657848135824,
         },
         {
-          threatInfoID: 14399,
-          ioc: "211.95.50.4",
-          domainCount: "0",
-          tagCount: "5",
-          itelCount: "10",
-          judge: 2,
-          poc: false,
-          ctime: "1657694018004",
-          source: 0,
+          id: 133,
+          ip: "112.96.80.229",
+          threat_id_info: "14429",
+          tag_count: 1,
+          itel_count: 3,
+          judge: 1,
+          source: 1,
+          ctime: 1657676372732,
         },
         {
-          threatInfoID: 14399,
-          ioc: "211.95.50.4",
-          domainCount: "0",
-          tagCount: "5",
-          itelCount: "10",
+          id: 90,
+          ip: "106.75.129.215",
+          threat_id_info: "14568",
+          domain_count: 5,
+          tag_count: 5,
+          itel_count: 8,
           judge: 2,
-          poc: false,
-          ctime: "1657694018004",
-          source: 0,
+          source: 1,
+          ctime: 1657840523147,
         },
         {
-          threatInfoID: 14399,
-          ioc: "211.95.50.4",
-          domainCount: "0",
-          tagCount: "5",
-          itelCount: "10",
+          id: 40,
+          ip: "14.18.81.80",
+          threat_id_info: "14556",
+          domain_count: 1,
+          tag_count: 3,
+          itel_count: 6,
           judge: 2,
-          poc: false,
-          ctime: "1657694018004",
-          source: 0,
+          source: 1,
+          ctime: 1657790439673,
         },
         {
-          threatInfoID: 14399,
-          ioc: "211.95.50.4",
-          domainCount: "0",
-          tagCount: "5",
-          itelCount: "10",
+          id: 95,
+          ip: "64.227.188.188",
+          threat_id_info: "14556",
+          tag_count: 3,
+          itel_count: 8,
           judge: 2,
-          poc: false,
-          ctime: "1657694018004",
-          source: 0,
+          source: 1,
+          ctime: 1657790439673,
         },
         {
-          threatInfoID: 14399,
-          ioc: "211.95.50.4",
-          domainCount: "0",
-          tagCount: "5",
-          itelCount: "10",
+          id: 20,
+          ip: "174.138.63.58",
+          threat_id_info: "14626",
+          domain_count: 83,
+          tag_count: 3,
+          itel_count: 6,
           judge: 2,
-          poc: false,
-          ctime: "1657694018004",
-          source: 0,
-        },
-        {
-          threatInfoID: 14399,
-          ioc: "211.95.50.4",
-          domainCount: "0",
-          tagCount: "5",
-          itelCount: "10",
-          judge: 2,
-          poc: false,
-          ctime: "1657694018004",
-          source: 0,
-        },
-        {
-          threatInfoID: 14399,
-          ioc: "211.95.50.4",
-          domainCount: "0",
-          tagCount: "5",
-          itelCount: "10",
-          judge: 2,
-          poc: false,
-          ctime: "1657694018004",
-          source: 0,
+          source: 1,
+          ctime: 1657882515888,
         },
       ],
-      totalCount: 126,
+      totalCount: 0,
       pageSize: 10,
-      page: 0,
+      page: 1,
       tableData: [],
     };
   },
@@ -196,11 +178,25 @@ export default {
   methods: {
     getTableData: function () {
       var that = this;
-      this.axios
-        .get("https://baidu.com")
+      this.axios({
+        url: "threats",
+        method: "GET",
+        params: {
+          current: this.page,
+          page_size: this.pageSize,
+        },
+      })
         .then((res) => {
           console.log(res.data);
-          
+          if (res.data.code == 0) {
+            that.data = res.data;
+            that.totalCount = res.data.data.pagination.total;
+            that.tableData = res.data.data.list;
+            console.log(that.totalCount);
+            //that.$refs.table.doLatout();
+          } else {
+            console.log("网络错误");
+          }
         })
         .catch((err) => {
           console.log(err);
@@ -208,7 +204,7 @@ export default {
     },
     formateJudgeType: function (row, column, cellValue, index) {
       var t = cellValue;
-      var result = "——";
+      let result = "-"
       switch (t) {
         case 0:
           result = "安全";
@@ -220,7 +216,7 @@ export default {
           result = "恶意";
           break;
         default:
-          result = t;
+          result = "-";
           break;
       }
       return result;
@@ -229,9 +225,57 @@ export default {
       let time = new Date(parseInt(cellValue)).toLocaleString();
       return time;
     },
+    formateSource:function (row, column, cellValue, index){
+      var t = cellValue;
+      console.log(t)
+      let result = "-"
+      switch (t) {
+        case -1:
+          result = "爬取";
+          break;
+        case 1:
+          result = "IOC";
+          break;
+        default:
+          result = "-";
+          break;
+      }
+      return result;
+    },
+    cellClick: function (row, column, cell, event) {
+      /*
+	    console.log(row)
+	    console.log(column)
+	    console.log(cell)
+      console.log(event)
+      */
+    },
+    tableCellClassName({ row, column, rowIndex, columnIndex }) {
+      //注意这⾥是解构
+      //利⽤单元格的 className 的回调⽅法，给⾏列索引赋值
+      row.index = rowIndex;
+      column.index = columnIndex;
+    },
+    onRowClick(row, column) {
+      if (column.index == 0) {
+        let index = row.index;
+        let id = this.tableData[index].threat_id_info;
+        let url = "https://x.threatbook.com/v5/article?threatInfoID=" + id;
+        window.open(url, "_blank");
+      }
+    },
     interfaceTrans: function (rawData) {},
-    onPageChange: function () {
-      console.log("pageChange");
+    onPageChange: function (p) {
+      console.log(p);
+      this.page = p;
+      this.getTableData();
+    },
+    dataWasher: function (row, column, cellValue, index) {
+      if (cellValue == -1 || cellValue == undefined) {
+        return "-";
+      } else {
+        return cellValue;
+      }
     },
   },
 };
