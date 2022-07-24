@@ -46,5 +46,6 @@ func New() *fiber.App {
 	if global.CONFIG.Common.Swagger == "enable" {
 		f.Get("/swagger/*", swagger.HandlerDefault)
 	}
+	f.Static("/", "./static/dist")
 	return f
 }
