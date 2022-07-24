@@ -15,6 +15,7 @@ FROM alpine:latest AS BUILDER
 LABEL MAINTAINER="https://hackerchai.com"
 
 RUN sed -i 's/https/http/' /etc/apk/repositories
+RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 RUN apk add curl
 RUN apk add ca-certificates && update-ca-certificates
 
