@@ -20,7 +20,7 @@ func (t *ThreatRepo) QueryThreatsWithPagnition(ctx context.Context, pagnition sc
 	pageSize := pagnition.GetPageSize()
 	offset := (current - 1) * pageSize
 
-	threats, err := t.DB.Threat.Query().Order(ent.Asc(threat.FieldID)).Offset(offset).Limit(pageSize).All(ctx)
+	threats, err := t.DB.Threat.Query().Order(ent.Desc(threat.FieldCtime)).Offset(offset).Limit(pageSize).All(ctx)
 	if err != nil {
 		logger.Error("QueryThreatsWithPagnition error: " + err.Error())
 		return nil, schema.PaginationResponse{}, err
