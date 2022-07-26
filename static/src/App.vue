@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <div id="nav">
-      <img src="./assets/logo.png" class="logo">
       <h2>威胁情报管理系统</h2>
     </div>
     <router-view />
@@ -77,11 +76,11 @@
   color: var(--color-heighter);
   display: flex;
   align-items: center;
+  margin:  0 2%;
 }
 .logo{
   height: 48px;
   width: 48px;
   padding: 0;
-  margin:  0 2%;
 }
 </style>
